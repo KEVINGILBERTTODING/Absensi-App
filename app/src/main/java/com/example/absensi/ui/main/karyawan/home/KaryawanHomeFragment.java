@@ -20,6 +20,7 @@ import com.example.absensi.R;
 import com.example.absensi.data.api.ApiConfig;
 import com.example.absensi.data.api.KaryawanService;
 import com.example.absensi.data.model.AbsenModel;
+import com.example.absensi.data.model.ResponseModel;
 import com.example.absensi.databinding.FragmentKaryawanHomeBinding;
 import com.example.absensi.ui.main.auth.LoginActivity;
 import com.example.absensi.ui.main.karyawan.adapter.AbsenAdapter;
@@ -47,6 +48,7 @@ public class KaryawanHomeFragment extends Fragment {
     KaryawanService karyawanService;
     AlertDialog progressDialog;
 
+    private String formattedTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,13 +72,46 @@ public class KaryawanHomeFragment extends Fragment {
 
         Date currentTime = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd-MM-yyyy hh:mm:ss a", Locale.ENGLISH);
-        String formattedTime = dateFormat.format(currentTime);
+        formattedTime  = dateFormat.format(currentTime);
         getAbsenHistory();
 
         binding.tvWaktu.setText(formattedTime);
 
+        listener();
 
 
+
+    }
+
+    private void listener() {
+        binding.btnAbsentNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressBar("Loading", "Validasi absen...", true);
+                karyawanService.insertAbsen(userId, binding.tvNama.getText().toString(), formattedTime)
+                        .enqueue(new Callback<ResponseModel>() {
+                            @Override
+                            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                    showProgressBar("sdsd", "sdsds", false);
+                                    showToast("success", "Berhasil absen hari ini");
+                                    binding.rvAbsen.setAdapter(null);
+                                    getAbsenHistory();
+                                }else {
+                                    showProgressBar("sdsd", "sdsds", false);
+                                    showToast("error", "Terjadi kesalahan");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                showProgressBar("sdsd", "sdsds", false);
+                                showToast("error", "Tidak ada koneksi internet");
+
+                            }
+                        });
+            }
+        });
     }
 
     private void getAbsenHistory() {
