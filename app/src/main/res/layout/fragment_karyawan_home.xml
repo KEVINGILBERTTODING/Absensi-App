@@ -1,12 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent"
         tools:context=".ui.main.karyawan.home.KaryawanHomeFragment">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/_10sdp"
+            android:background="@color/green"
+            android:layout_height="@dimen/_200sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Hai, Katon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNama"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Jangan lupa absen hari ini!"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/popsem"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_alignParentRight="true"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"/>
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:contentPadding="@dimen/_10sdp"
+            android:id="@+id/cardAbsensi"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kartu Absen"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Nama Lengkap"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black2"/>
+                <TextView
+                    android:id="@+id/tvNamaLengkap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Katon"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="NIP"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black2"/>
+                <TextView
+                    android:id="@+id/tvNIP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="nip"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Waktu"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black2"/>
+
+                <TextView
+                    android:id="@+id/tvWaktu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Saturday, 11-06-2023 12:00:20 am"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textColor="@color/green"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/gray"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak Hadir"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:id="@+id/btnTidakHadir"
+                        app:backgroundTint="@color/yellow"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Absen Sekarang"
+                        android:id="@+id/btnAbsentNow"
+                        app:backgroundTint="@color/blue"/>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Riwayat Absen"
+            android:id="@+id/tvTitle"
+            android:layout_below="@+id/cardAbsensi"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/popsem"
+            android:layout_margin="@dimen/_10sdp"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_below="@id/tvTitle"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvAbsen"
+            tools:listitem="@layout/lsit_absen_karyawan"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tidak ada data."
+            android:id="@+id/tvEmpty"
+            android:visibility="gone"
+            android:textSize="@dimen/_11sdp"
+            android:layout_below="@id/cardAbsensi"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:fontFamily="@font/popsem"
+            android:textColor="@color/black2"/>
+
 
 
     </RelativeLayout>
