@@ -1,14 +1,18 @@
-package com.example.absensi;
+package com.example.absensi.ui.main.karyawan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.absensi.R;
+
+public class KaryawanMainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_karyawan_main);
     }
 }
