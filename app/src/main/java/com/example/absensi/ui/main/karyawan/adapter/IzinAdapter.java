@@ -1,16 +1,20 @@
 package com.example.absensi.ui.main.karyawan.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.absensi.R;
 import com.example.absensi.data.model.KeteranganModel;
+import com.example.absensi.ui.main.karyawan.izin.PreviewImageFragment;
 
 import java.util.List;
 
@@ -43,13 +47,24 @@ public class IzinAdapter extends RecyclerView.Adapter<IzinAdapter.ViewHolder> {
         return keteranganModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvNama, tvTanggal, tvJenis;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNama = itemView.findViewById(R.id.tvNama);
             tvJenis = itemView.findViewById(R.id.tvJenis);
             tvTanggal = itemView.findViewById(R.id.tvDate);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Fragment fragment = new PreviewImageFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("image", keteranganModelList.get(getAdapterPosition()).getBukti());
+            fragment.setArguments(bundle);
+            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameKaryawan, fragment).addToBackStack(null).commit();
         }
     }
 }
