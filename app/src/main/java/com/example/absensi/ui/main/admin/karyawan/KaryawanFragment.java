@@ -66,7 +66,17 @@ public class KaryawanFragment extends Fragment {
                 return false;
             }
         });
+        listener();
 
+    }
+
+    private void listener() {
+        binding.btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replace(new InsertKaryawanFragment());
+            }
+        });
     }
 
     private void getData() {
@@ -142,5 +152,10 @@ public class KaryawanFragment extends Fragment {
         }
 
 
+    }
+
+    private void replace(Fragment fragment) {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAdmin, fragment)
+                .addToBackStack(null).commit();
     }
 }

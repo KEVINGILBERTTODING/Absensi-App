@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="match_parent"
-        tools:context=".ui.main.karyawan.profile.EditProfileFragment">
+        tools:context=".ui.main.admin.profile.InsertKaryawanFragment">
 
         <RelativeLayout
             android:id="@+id/rlHeader"
@@ -25,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_25sdp"
-                    android:text="Profile"
+                    android:text="Tambah Karyawan Baru"
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/white"/>
 
@@ -33,36 +33,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_11sdp"
-                    android:text="Ubah data diri anda"
+                    android:text="Isi data karyawan di bawah ini"
                     android:fontFamily="@font/popmed"
                     android:textColor="@color/white"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:backgroundTint="@color/white"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:textColor="@color/green"
-                        android:id="@+id/btnUbahProfile"
-                        android:text="Ubah profile"/>
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:backgroundTint="@color/white"
-                        app:icon="@drawable/baseline_logout_24"
-                        app:iconTint="@color/red"
-                        android:id="@+id/btnLogOut"
-                        android:textColor="@color/red"
-                        android:text="Keluar"/>
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -73,7 +48,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:id="@+id/nestedScrollView"
-            android:visibility="gone"
             android:layout_below="@+id/rlHeader"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="wrap_content">
@@ -240,6 +214,36 @@
                     android:inputType="textPassword"
                     android:id="@+id/spJabatan"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9sdp"
+                    android:text="Foto"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:text="Pilih"
+                        app:cornerRadius="@dimen/_10sdp"
+                        app:backgroundTint="@color/blue"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnImagePicker"/>
+
+                    <EditText
+                        android:id="@+id/etPath"
+                        android:gravity="bottom"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:id="@+id/btnSimpan"
@@ -255,6 +259,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black2"
                     android:text="Batal"/>
+
+
 
 
 
