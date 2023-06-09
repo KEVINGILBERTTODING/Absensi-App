@@ -1,16 +1,20 @@
 package com.example.absensi.ui.main.admin.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.absensi.R;
 import com.example.absensi.data.model.KaryawanModel;
+import com.example.absensi.ui.main.admin.karyawan.EditKaryawanFragment;
 
 import org.w3c.dom.Text;
 
@@ -51,12 +55,25 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvNama, tvJabatan;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNama = itemView.findViewById(R.id.tvNama);
             tvJabatan = itemView.findViewById(R.id.tvJabatan);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Fragment fragment = new EditKaryawanFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("user_id", karyawanModelList.get(getAdapterPosition()).getIdKaryawan());
+            bundle.putString("image", karyawanModelList.get(getAdapterPosition()).getFoto());
+            fragment.setArguments(bundle);
+            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.frameAdmin, fragment)
+                    .addToBackStack(null).commit();
+
         }
     }
 }

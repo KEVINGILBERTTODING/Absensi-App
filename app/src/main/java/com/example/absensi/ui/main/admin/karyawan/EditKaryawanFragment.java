@@ -1,15 +1,10 @@
 package com.example.absensi.ui.main.admin.karyawan;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,61 +16,56 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.absensi.data.api.AdminServices;
 import com.example.absensi.data.api.ApiConfig;
 import com.example.absensi.data.api.KaryawanService;
 import com.example.absensi.data.model.JabatanModel;
 import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.ResponseModel;
+import com.example.absensi.databinding.FragmentEditKaraywanBinding;
 import com.example.absensi.databinding.FragmentEditProfileBinding;
-import com.example.absensi.databinding.FragmentInsertKaryawanBinding;
 import com.example.absensi.ui.main.adapter.SpinnerJabatanAdapter;
 import com.example.absensi.ui.main.auth.LoginActivity;
 import com.example.util.Constans;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InsertKaryawanFragment extends Fragment {
+public class EditKaryawanFragment extends Fragment {
 
-    private FragmentInsertKaryawanBinding binding;
+    private FragmentEditKaraywanBinding binding;
     private SpinnerJabatanAdapter spinnerJabatanAdapter;
     AlertDialog progressDialog;
     KaryawanService karyawanService;
-    AdminServices adminServices;
     SharedPreferences.Editor editor;
+    AdminServices adminServices;
     SharedPreferences sharedPreferences;
     List<JabatanModel> jabatanModelList;
     String [] opsiJk = {"Laki-laki", "Perempuan"};
     String [] opsiAgama = {"Kristen", "Islam", "Hindu", "Budha", "Konghucu"};
     String userId, jk, agama, jabatan;
 
-    private File file;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentInsertKaryawanBinding.inflate(inflater, container, false);
+        binding = FragmentEditKaraywanBinding.inflate(inflater, container, false);
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
-        adminServices = ApiConfig.getClient().create(AdminServices.class);
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        userId = sharedPreferences.getString(Constans.SHARED_PREF_USER_ID, null);
+        userId = getArguments().getString("user_id");
         editor = sharedPreferences.edit();
+        adminServices = ApiConfig.getClient().create(AdminServices.class);
 
         return binding.getRoot();
     }
@@ -84,6 +74,14 @@ public class InsertKaryawanFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getAllJabatan();
+        getProfile();
+
+        Glide.with(getContext())
+                .load(getArguments().getString("image"))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .fitCenter()
+                .centerCrop()
+                .into(binding.ivImage);
 
         ArrayAdapter adapterJk = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, opsiJk);
         adapterJk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -96,20 +94,18 @@ public class InsertKaryawanFragment extends Fragment {
     }
 
     private void listner() {
-        binding.btnImagePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
-
-            }
-        });
 
         binding.btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.nestedScrollView.setVisibility(View.GONE);
+                getActivity().onBackPressed();
+            }
+        });
+
+        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteKaryawan();
             }
         });
 
@@ -151,37 +147,7 @@ public class InsertKaryawanFragment extends Fragment {
         binding.btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (binding.etNama.getText().toString().isEmpty()) {
-                    binding.etNama.setError("Nama tidak boleh kosong");
-                    binding.etNama.requestFocus();
-                    return;
-                }else if (binding.etAlamat.getText().toString().isEmpty()) {
-                    binding.etAlamat.setError("Alamat tidak boleh kosong");
-                    binding.etAlamat.requestFocus();
-                    return;
-                }else if (binding.etNoTelp.getText().toString().isEmpty()) {
-                    binding.etNoTelp.setError("No Hp tidak boleh kosong");
-                    binding.etNoTelp.requestFocus();
-                    return;
-                }else if (binding.etUsername.getText().toString().isEmpty()) {
-                    binding.etUsername.setError("Username tidak boleh kosong");
-                    binding.etUsername.requestFocus();
-                    return;
-                }else if (binding.etPassword.getText().toString().isEmpty()) {
-                    binding.etPassword.setError("Password tidak boleh kosong");
-                    binding.etPassword.requestFocus();
-                    return;
-                }else if (binding.etAlamat.getText().toString().isEmpty()) {
-                    binding.etAlamat.setError("Alamat tidak boleh kosong");
-                    binding.etAlamat.requestFocus();
-                    return;
-                } else if (binding.etPath.getText().toString().isEmpty()) {
-                    binding.etPath.setError("Foto tidak boleh kosong");
-                    binding.etPath.requestFocus();
-                    return;
-                }else {
-                    insertKaryawan();
-                }
+                updateProfile();
             }
         });
 
@@ -217,7 +183,39 @@ public class InsertKaryawanFragment extends Fragment {
 
     }
 
-    private void insertKaryawan() {
+    private void getProfile() {
+        showProgressBar("Loading", "Memuat data pengguna...", true);
+        karyawanService.getProfile(userId).enqueue(new Callback<KaryawanModel>() {
+            @Override
+            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showProgressBar("sds", "dsd", false);
+                    binding.etNik.setText(response.body().getIdKaryawan());
+                    binding.etNama.setText(response.body().getNama());
+                    binding.etUsername.setText(response.body().getUsername());
+                    binding.etTtl.setText(response.body().getTmpTglLahir());
+                    binding.etAlamat.setText(response.body().getAlamat());
+                    binding.etNoTelp.setText(response.body().getNoTel());
+
+                }else {
+                    showProgressBar("Sds", "sdd", false);
+                    showToast("error", "Terjadi kesalahan");
+                    binding.btnSimpan.setEnabled(false);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+                showProgressBar("Sds", "sdd", false);
+                showToast("error", "Tidak ada koneksi internet");
+                binding.btnSimpan.setEnabled(false);
+
+            }
+        });
+    }
+
+    private void updateProfile() {
         showProgressBar("Loading", "Menyimpan perubahan...", true);
         HashMap map = new HashMap();
         map.put("id", RequestBody.create(MediaType.parse("text/plain"), binding.etNik.getText().toString()));
@@ -231,17 +229,13 @@ public class InsertKaryawanFragment extends Fragment {
         map.put("agama",RequestBody.create(MediaType.parse("text/plain"),  agama));
         map.put("jabatan",RequestBody.create(MediaType.parse("text/plain"),  jabatan));
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part image = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
-
-        adminServices.insertKaryawan(map, image).enqueue(new Callback<ResponseModel>() {
+        karyawanService.editProfile(map).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful() && response.body().getStatus() == 200) {
                     showToast("success", "Berhasil mengubah profile");
                     showProgressBar("Sdd", "dsd", false);
                     getActivity().onBackPressed();
-                    binding.nestedScrollView.setVisibility(View.GONE);
                 }else {
                     showToast("error", response.body().getMessage());
                     showProgressBar("Sdd", "dsd", false);
@@ -285,77 +279,29 @@ public class InsertKaryawanFragment extends Fragment {
 
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && data != null) {
-            if (requestCode == 1) {
-                Uri uri = data.getData();
-                String pdfPath = getRealPathFromUri(uri);
-                file = new File(pdfPath);
-                binding.etPath.setText(file.getName());
-
-            }
-        }
-    }
-
-
-    public String getRealPathFromUri(Uri uri) {
-        String filePath = "";
-        if (getContext().getContentResolver() != null) {
-            try {
-                InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
-                File file = new File(getContext().getCacheDir(), getFileName(uri));
-                writeFile(inputStream, file);
-                filePath = file.getAbsolutePath();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return filePath;
-    }
-
-    private String getFileName(Uri uri) {
-        String result = null;
-        if (uri.getScheme().equals("content")) {
-            Cursor cursor = getContext().getContentResolver().query(uri, null, null, null, null);
-            try {
-                if (cursor != null && cursor.moveToFirst()) {
-                    int displayNameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    if (displayNameIndex != -1) {
-                        result = cursor.getString(displayNameIndex);
-                    }
-                }
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
+    private void deleteKaryawan() {
+        showProgressBar("Loading", "Menghapus data karyawan...", true);
+        adminServices.deleteKarywan(userId).enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.isSuccessful() && response.body().getStatus() == 200) {
+                    showProgressBar("ssd", "sdsd", false);
+                    showToast("success", "Berhasil mengubah data");
+                    getActivity().onBackPressed();
+                }else {
+                    showProgressBar("ssd", "sdsd", false);
+                    showToast("error", "Gagal mengubah data");
                 }
             }
-        }
-        if (result == null) {
-            result = uri.getPath();
-            int cut = result.lastIndexOf('/');
-            if (cut != -1) {
-                result = result.substring(cut + 1);
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                showProgressBar("ssd", "sdsd", false);
+                showToast("error", "Tidak ada koneksi internet");
+
             }
-        }
-        return result;
+        });
     }
-
-    private void writeFile(InputStream inputStream, File file) throws IOException {
-        OutputStream outputStream = new FileOutputStream(file);
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, length);
-        }
-        outputStream.flush();
-        outputStream.close();
-        inputStream.close();
-    }
-
 
 
 

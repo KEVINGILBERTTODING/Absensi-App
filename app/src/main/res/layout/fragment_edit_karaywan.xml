@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="match_parent"
-        tools:context=".ui.main.admin.profile.InsertKaryawanFragment">
+        tools:context=".ui.main.admin.karyawan.EditKaryawanFragment">
 
         <RelativeLayout
             android:id="@+id/rlHeader"
@@ -25,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_25sdp"
-                    android:text="Tambah Karyawan Baru"
+                    android:text="Ubah Karyawan"
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/white"/>
 
@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_11sdp"
-                    android:text="Isi data karyawan di bawah ini"
+                    android:text="Ubah data diri karyawan"
                     android:fontFamily="@font/popmed"
                     android:textColor="@color/white"/>
 
@@ -58,17 +58,25 @@
                 android:padding="@dimen/_10sdp"
                 android:orientation="vertical">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/iv_image"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentRight="true"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:textSize="@dimen/_9sdp"
                     android:text="NIK"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:inputType="number"
                     android:textSize="@dimen/_11sdp"
                     android:id="@+id/etNik"/>
 
@@ -215,36 +223,6 @@
                     android:inputType="textPassword"
                     android:id="@+id/spJabatan"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_9sdp"
-                    android:text="Foto"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:text="Pilih"
-                        app:cornerRadius="@dimen/_10sdp"
-                        app:backgroundTint="@color/blue"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnImagePicker"/>
-
-                    <EditText
-                        android:id="@+id/etPath"
-                        android:gravity="bottom"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:id="@+id/btnSimpan"
@@ -254,14 +232,20 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
+                    android:id="@+id/btnDelete"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:backgroundTint="@color/red"
+                    android:layout_height="wrap_content"
+                    android:text="Hapus"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
                     android:id="@+id/btnBatal"
                     app:backgroundTint="@color/gray"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black2"
                     android:text="Batal"/>
-
-
 
 
 

@@ -1,5 +1,6 @@
 package com.example.absensi.data.model;
 
+import com.example.util.Constans;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -137,7 +138,7 @@ public class KaryawanModel implements Serializable {
         }
 
         public String getFoto() {
-            return foto;
+            return Constans.URL_FOTO_PROFIL + foto;
         }
 
         public void setFoto(String foto) {
