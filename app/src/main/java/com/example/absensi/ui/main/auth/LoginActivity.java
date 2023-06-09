@@ -14,6 +14,7 @@ import com.example.absensi.R;
 import com.example.absensi.data.api.ApiConfig;
 import com.example.absensi.data.api.AuthService;
 import com.example.absensi.data.model.AuthModel;
+import com.example.absensi.ui.main.admin.AdminMainActivity;
 import com.example.absensi.ui.main.karyawan.KaryawanMainActivity;
 import com.example.util.Constans;
 
@@ -47,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean("logged_in", false)) {
             if (sharedPreferences.getInt(Constans.SHARED_PREF_ROLE, 0) == 2) {
                 startActivity(new Intent(LoginActivity.this, KaryawanMainActivity.class));
+                finish();
+            }else if (sharedPreferences.getInt(Constans.SHARED_PREF_ROLE, 0) == 1) {
+                startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
                 finish();
             }
         }
@@ -92,6 +96,14 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, KaryawanMainActivity.class));
                         finish();
                     }else if (response.body().getRole() == 1) { // ADMIN
+                        editor.putBoolean("logged_in", true);
+                        editor.putString(Constans.SHARED_PREF_USER_ID, response.body().getUserId());
+                        editor.putInt(Constans.SHARED_PREF_ROLE, response.body().getRole());
+                        editor.putString(Constans.SHARED_PREF_NAMA_LENGKAP, response.body().getNama());
+                        editor.apply();
+                        showProgressBar("sdsd", "sds", false);
+                        startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+                        finish();
 
                     }
 

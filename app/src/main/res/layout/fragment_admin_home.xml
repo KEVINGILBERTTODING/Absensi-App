@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.main.admin.home.AdminHomeFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:background="@color/green"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Hai, Katon"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_11sdp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvNama"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Selamat Datang"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/popsem"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_alignParentRight="true"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu Admin"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popsem"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/cvDataKaryawan"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/baseline_groups_2_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Karyawan"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/cvDataUser"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/baseline_person_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data User"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/cvDataJabatan"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/baseline_work_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data User"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/cvDataAbsen"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/baseline_assignment_turned_in_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Absen"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:contentPadding="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/cvDataKeterangan"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/baseline_receipt_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Keterangan"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/popsem"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="@dimen/_11sdp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>
+
+
+
+
