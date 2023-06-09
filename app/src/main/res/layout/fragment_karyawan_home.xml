@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="match_parent"
@@ -164,20 +164,29 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Riwayat Absen"
-            android:id="@+id/tvTitle"
             android:layout_below="@+id/cardAbsensi"
-            android:textSize="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:fontFamily="@font/popsem"
-            android:layout_margin="@dimen/_10sdp"
-            android:textColor="@color/black"/>
+            android:text="Riwayat Absen"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@id/tvTitle"
+            android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_below="@id/tvTitle"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tabLayout"
             android:id="@+id/rvAbsen"
             tools:listitem="@layout/lsit_absen_karyawan"/>
 

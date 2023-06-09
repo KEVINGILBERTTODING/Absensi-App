@@ -31,10 +31,13 @@ import com.example.absensi.R;
 import com.example.absensi.data.api.ApiConfig;
 import com.example.absensi.data.api.KaryawanService;
 import com.example.absensi.data.model.AbsenModel;
+import com.example.absensi.data.model.KeteranganModel;
 import com.example.absensi.data.model.ResponseModel;
 import com.example.absensi.databinding.FragmentKaryawanHomeBinding;
 import com.example.absensi.ui.main.karyawan.adapter.AbsenAdapter;
+import com.example.absensi.ui.main.karyawan.adapter.IzinAdapter;
 import com.example.util.Constans;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,6 +64,8 @@ public class KaryawanHomeFragment extends Fragment {
     SharedPreferences sharedPreferences;
     String userId;
     List<AbsenModel> absenModelList;
+    private IzinAdapter izinAdapter;
+    List<KeteranganModel> keteranganModelList;
     String [] opsiJenis = {"Izin", "Sakit"};
     AbsenAdapter absenAdapter;
     LinearLayoutManager linearLayoutManager;
@@ -84,6 +89,8 @@ public class KaryawanHomeFragment extends Fragment {
         binding.tvNamaLengkap.setText(sharedPreferences.getString(Constans.SHARED_PREF_NAMA_LENGKAP, null));
         binding.tvNIP.setText(sharedPreferences.getString(Constans.SHARED_PREF_USER_ID, null));
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Absen"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Izin"));
 
 
         return binding.getRoot();
@@ -101,6 +108,29 @@ public class KaryawanHomeFragment extends Fragment {
         binding.tvWaktu.setText(formattedTime);
 
         listener();
+
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    binding.rvAbsen.setAdapter(null);
+                    getAbsenHistory();
+                }else if (tab.getPosition() == 1) {
+                    binding.rvAbsen.setAdapter(null);
+                    getIzinHistory();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
@@ -175,6 +205,40 @@ public class KaryawanHomeFragment extends Fragment {
 
 
     }
+    private void getIzinHistory() {
+        showProgressBar("Loading", "Memuat data...", true);
+        karyawanService.getAllKeterangan(userId).enqueue(new Callback<List<KeteranganModel>>() {
+            @Override
+            public void onResponse(Call<List<KeteranganModel>> call, Response<List<KeteranganModel>> response) {
+                if (response.isSuccessful() && response.body().size() > 0) {
+                    keteranganModelList = response.body();
+                    binding.tvEmpty.setVisibility(View.GONE);
+                    izinAdapter = new IzinAdapter(getContext(), keteranganModelList);
+                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                    binding.rvAbsen.setLayoutManager(linearLayoutManager);
+                    binding.rvAbsen.setAdapter(izinAdapter);
+                    binding.rvAbsen.setHasFixedSize(true);
+                    showProgressBar("sds", "dd", false);
+
+                }else {
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                    showProgressBar("sds", "dd", false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<KeteranganModel>> call, Throwable t) {
+                binding.tvEmpty.setVisibility(View.GONE);
+                showProgressBar("sds", "dd", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+            }
+        });
+
+
+    }
+
+
 
     private void inserIzin() {
         Dialog dialog = new Dialog(getContext());

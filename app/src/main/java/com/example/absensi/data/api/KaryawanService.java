@@ -3,6 +3,7 @@ package com.example.absensi.data.api;
 import com.example.absensi.data.model.AbsenModel;
 import com.example.absensi.data.model.JabatanModel;
 import com.example.absensi.data.model.KaryawanModel;
+import com.example.absensi.data.model.KeteranganModel;
 import com.example.absensi.data.model.ResponseModel;
 
 import java.util.List;
@@ -54,6 +55,11 @@ public interface KaryawanService {
 
     @GET("karyawan/getProfile")
     Call<KaryawanModel> getProfile(
+            @Query("id") String id
+    );
+
+    @GET("karyawan/getAllKeterangan")
+    Call<List<KeteranganModel>> getAllKeterangan(
             @Query("id") String id
     );
  }

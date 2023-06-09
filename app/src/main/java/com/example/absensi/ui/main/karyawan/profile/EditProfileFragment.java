@@ -2,6 +2,7 @@ package com.example.absensi.ui.main.karyawan.profile;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.ResponseModel;
 import com.example.absensi.databinding.FragmentEditProfileBinding;
 import com.example.absensi.ui.main.adapter.SpinnerJabatanAdapter;
+import com.example.absensi.ui.main.auth.LoginActivity;
 import com.example.util.Constans;
 
 import java.util.HashMap;
@@ -41,6 +43,7 @@ public class EditProfileFragment extends Fragment {
     private SpinnerJabatanAdapter spinnerJabatanAdapter;
     AlertDialog progressDialog;
     KaryawanService karyawanService;
+    SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
     List<JabatanModel> jabatanModelList;
     String [] opsiJk = {"Laki-laki", "Perempuan"};
@@ -57,6 +60,7 @@ public class EditProfileFragment extends Fragment {
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString(Constans.SHARED_PREF_USER_ID, null);
+        editor = sharedPreferences.edit();
 
         Log.d("user id", "onCreateView: " + userId);
 
@@ -132,6 +136,13 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 updateProfile();
+            }
+        });
+
+        binding.btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOust();
             }
         });
     }
@@ -257,6 +268,15 @@ public class EditProfileFragment extends Fragment {
         }else {
             Toasty.error(getContext(), text, Toasty.LENGTH_SHORT).show();
         }
+
+
+    }
+
+    private void logOust() {
+        editor.clear().apply();
+        startActivity(new Intent(getContext(), LoginActivity.class));
+        getActivity().finish();
+
     }
 
 
