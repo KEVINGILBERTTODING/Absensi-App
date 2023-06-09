@@ -1,6 +1,8 @@
 package com.example.absensi.data.api;
 
 import com.example.absensi.data.model.AbsenModel;
+import com.example.absensi.data.model.JabatanModel;
+import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.ResponseModel;
 
 import java.util.List;
@@ -40,4 +42,18 @@ public interface KaryawanService {
             @PartMap Map<String, RequestBody> text,
             @Part MultipartBody.Part image
             );
+
+    @GET("karyawan/getalljabatan")
+    Call<List<JabatanModel>> getAllJabatan();
+
+    @Multipart
+    @POST("karyawan/editProfile")
+    Call<ResponseModel> editProfile(
+            @PartMap Map<String, RequestBody> text
+    );
+
+    @GET("karyawan/getProfile")
+    Call<KaryawanModel> getProfile(
+            @Query("id") String id
+    );
  }
