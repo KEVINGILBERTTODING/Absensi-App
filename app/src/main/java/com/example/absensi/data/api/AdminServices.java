@@ -1,6 +1,7 @@
 package com.example.absensi.data.api;
 
 import com.airbnb.lottie.L;
+import com.example.absensi.data.model.AbsenModel;
 import com.example.absensi.data.model.JabatanModel;
 import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.ResponseModel;
@@ -44,5 +45,14 @@ public interface AdminServices {
     @POST("admin/insertJabatan")
     Call<ResponseModel> insertJabatan(
             @Field("jabatan") String jabatan
+    );
+
+    @GET("admin/getAllAbsensi")
+    Call<List<AbsenModel>> getAllAbsensi();
+
+    @FormUrlEncoded
+    @POST("admin/deleteAbsen")
+    Call<ResponseModel> deleteAbsen(
+            @Field("id") String id
     );
 }
