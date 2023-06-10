@@ -88,6 +88,7 @@
             app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
             app:boxCornerRadiusBottomStart="@dimen/_10sdp"
             app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+            app:passwordToggleEnabled="true"
             app:boxCornerRadiusTopStart="@dimen/_10sdp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/popmed"
                 android:hint="Password"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp">
             </com.google.android.material.textfield.TextInputEditText>

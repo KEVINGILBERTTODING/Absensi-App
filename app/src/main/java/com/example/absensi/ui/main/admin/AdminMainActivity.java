@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.absensi.R;
 import com.example.absensi.ui.main.admin.home.AdminHomeFragment;
+import com.example.absensi.ui.main.admin.profile.EditProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -27,6 +28,9 @@ public class AdminMainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new AdminHomeFragment());
+                    return true;
+                }else   if (item.getItemId() == R.id.menuPerson) {
+                    replace(new EditProfileFragment());
                     return true;
                 }
 

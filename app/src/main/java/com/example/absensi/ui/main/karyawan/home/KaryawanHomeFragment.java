@@ -27,15 +27,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.absensi.R;
 import com.example.absensi.data.api.ApiConfig;
 import com.example.absensi.data.api.KaryawanService;
 import com.example.absensi.data.model.AbsenModel;
+import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.KeteranganModel;
 import com.example.absensi.data.model.ResponseModel;
 import com.example.absensi.databinding.FragmentKaryawanHomeBinding;
 import com.example.absensi.ui.main.karyawan.adapter.AbsenAdapter;
 import com.example.absensi.ui.main.karyawan.adapter.IzinAdapter;
+import com.example.absensi.ui.main.karyawan.profile.EditProfileFragment;
 import com.example.util.Constans;
 import com.google.android.material.tabs.TabLayout;
 
@@ -106,6 +109,7 @@ public class KaryawanHomeFragment extends Fragment {
         getAbsenHistory();
 
         binding.tvWaktu.setText(formattedTime);
+        getProfile();
 
         listener();
 
@@ -169,6 +173,15 @@ public class KaryawanHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 inserIzin();
+            }
+        });
+
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameKaryawan, new EditProfileFragment())
+                        .addToBackStack(null).commit();
             }
         });
     }
@@ -360,6 +373,33 @@ public class KaryawanHomeFragment extends Fragment {
         }else {
             Toasty.error(getContext(), text, Toasty.LENGTH_SHORT).show();
         }
+    }
+
+    private void getProfile() {
+        showProgressBar("Loading", "Memuat data...", true);
+        karyawanService.getProfile(userId).enqueue(new Callback<KaryawanModel>() {
+            @Override
+            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    Glide.with(getContext())
+                            .load(response.body().getFoto())
+                            .centerCrop()
+                            .fitCenter()
+                            .into(binding.profileImage);
+                    showProgressBar("dsd", "sdd",false);
+                }else {
+                    showProgressBar("dsds", "add", false);
+                    showToast("error", "Terjadi kesalahan");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+                showProgressBar("dsds", "add", false);
+                showToast("error", "Tidak ada koneksi internet");
+
+            }
+        });
     }
 
 

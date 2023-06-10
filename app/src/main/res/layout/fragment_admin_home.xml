@@ -25,7 +25,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="Hai, Katon"
+                        android:text="Hai, Admin"
                         android:textColor="@color/white"
                         android:fontFamily="@font/popmed"
                         android:textSize="@dimen/_11sdp"
