@@ -28,6 +28,26 @@
                 android:textSize="@dimen/_13sdp"
                 android:layout_height="wrap_content"/>
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Nama"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"/>
+
+            <EditText
+                android:enabled="false"
+                android:id="@+id/etNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,15 +57,28 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"/>
 
-            <Spinner
-                android:id="@+id/spJenis"
+            <EditText
+                android:enabled="false"
+                android:id="@+id/etJenis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/popmed"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
-                android:hint="Keterangan"
+                android:text="Alasan"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"/>
+
+
+
 
 
             <EditText
@@ -55,6 +88,8 @@
                 android:fontFamily="@font/popmed"
                 android:textSize="@dimen/_11sdp"
                 android:hint="Alasan..."
+                android:enabled="false"
+                android:textColor="@color/black"
                 android:gravity="start"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:lines="4"
@@ -88,50 +123,23 @@
                 android:textColor="@color/black2"
                 android:textSize="@dimen/_11sdp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/ivIzin"/>
 
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:text="Pilih"
-                    android:id="@+id/btnPdfPicker"
-                    app:cornerRadius="@dimen/_5sdp"
-                    app:backgroundTint="@color/blue"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_gravity="bottom"
-                    android:enabled="false"
-                    android:id="@+id/etPdfPath"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_height="wrap_content"
-                    android:maxLength="30"/>
-
-            </LinearLayout>
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:backgroundTint="@color/green"
-                android:text="Submit"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBatal"
+                android:id="@+id/btnOke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black2"
                 app:backgroundTint="@color/gray"
-                android:text="Batal"/>
+                android:text="Oke"/>
 
 
 

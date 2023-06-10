@@ -4,6 +4,7 @@ import com.airbnb.lottie.L;
 import com.example.absensi.data.model.AbsenModel;
 import com.example.absensi.data.model.JabatanModel;
 import com.example.absensi.data.model.KaryawanModel;
+import com.example.absensi.data.model.KeteranganModel;
 import com.example.absensi.data.model.ResponseModel;
 
 import java.util.List;
@@ -55,4 +56,13 @@ public interface AdminServices {
     Call<ResponseModel> deleteAbsen(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("admin/deleteizin")
+    Call<ResponseModel> deleteIzin(
+            @Field("id") String id
+    );
+
+    @GET("admin/getAllIzin")
+    Call<List<KeteranganModel>> getAllIzin();
 }

@@ -16,6 +16,7 @@ import com.example.absensi.R;
 import com.example.absensi.data.model.KeteranganModel;
 import com.example.absensi.ui.main.karyawan.izin.PreviewImageFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IzinAdapter extends RecyclerView.Adapter<IzinAdapter.ViewHolder> {
@@ -46,6 +47,8 @@ public class IzinAdapter extends RecyclerView.Adapter<IzinAdapter.ViewHolder> {
     public int getItemCount() {
         return keteranganModelList.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvNama, tvTanggal, tvJenis;

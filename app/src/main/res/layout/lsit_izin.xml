@@ -29,9 +29,23 @@
                 android:text="date"
                 android:fontFamily="@font/popmed"
                 android:textSize="@dimen/_10sdp"
-                android:textColor="@color/green"
+                android:textColor="@color/yellow"
                 android:id="@+id/tvDate"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="jenis"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                android:id="@+id/tvJenis"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
@@ -42,9 +56,19 @@
                 android:layout_gravity="end"
 
                 app:backgroundTint="@color/red"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat"
+                app:cornerRadius="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:id="@+id/btnDetail"
+                android:layout_gravity="end"
+
+                app:backgroundTint="@color/green"/>
         </LinearLayout>
-
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
