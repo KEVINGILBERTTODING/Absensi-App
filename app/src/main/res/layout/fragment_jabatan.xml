@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.admin.karyawan.KaryawanFragment">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_10sdp"
+            android:background="@color/green"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Tambah jabatan baru"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/popsem"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchbar"
+                    android:layout_width="match_parent"
+                    app:queryHint="Cari Jabatan"
+                    app:iconifiedByDefault="false"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_alignParentRight="true"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"/>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvJabatan"
+            tools:listitem="@layout/lsit_karyawan"
+            android:layout_below="@+id/header"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Tidak ada data"
+            android:id="@+id/tvEmppty"
+            android:fontFamily="@font/popmed"
+            android:visibility="gone"
+            android:textSize="@dimen/_11sdp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:backgroundTint="@color/green"
+            android:id="@+id/btnInsert"
+            android:layout_alignParentRight="true"
+            app:tint="@color/white"
+            android:src="@drawable/baseline_add_24"/>
+
+
+
+
+    </RelativeLayout>
+
+</layout>
+

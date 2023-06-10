@@ -1,5 +1,7 @@
 package com.example.absensi.data.api;
 
+import com.airbnb.lottie.L;
+import com.example.absensi.data.model.JabatanModel;
 import com.example.absensi.data.model.KaryawanModel;
 import com.example.absensi.data.model.ResponseModel;
 
@@ -16,6 +18,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 public interface AdminServices {
     @GET("admin/getallkaryawan")
@@ -32,5 +35,14 @@ public interface AdminServices {
     @POST("admin/deleteKarayawan")
     Call<ResponseModel> deleteKarywan(
             @Field("id") String id
+    );
+
+    @GET("admin/getAllJabatan")
+    Call<List<JabatanModel>> getAllJabatan();
+
+    @FormUrlEncoded
+    @POST("admin/insertJabatan")
+    Call<ResponseModel> insertJabatan(
+            @Field("jabatan") String jabatan
     );
 }

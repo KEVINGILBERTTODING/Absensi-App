@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.absensi.R;
 import com.example.absensi.databinding.FragmentAdminHomeBinding;
+import com.example.absensi.ui.main.admin.jabatan.JabatanFragment;
 import com.example.absensi.ui.main.admin.karyawan.KaryawanFragment;
 
 public class AdminHomeFragment extends Fragment {
@@ -40,6 +41,13 @@ public class AdminHomeFragment extends Fragment {
 
                 replace(new KaryawanFragment());
 
+            }
+        });
+
+        binding.cvDataJabatan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replace(new JabatanFragment());
             }
         });
     }

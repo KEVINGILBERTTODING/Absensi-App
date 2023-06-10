@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="@dimen/_20sdp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Tambahkan Jabatan Baru"
+                android:fontFamily="@font/popsem"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_height="wrap_content"/>
+
+
+
+            <EditText
+                android:id="@+id/etANamaJabatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11sdp"
+                android:hint="Nama Jabatan..."
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"/>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:backgroundTint="@color/green"
+                android:text="Submit"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBatal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                app:backgroundTint="@color/gray"
+                android:text="Batal"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
