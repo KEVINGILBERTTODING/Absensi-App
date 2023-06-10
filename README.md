@@ -1,4 +1,5 @@
 # Absensi-App
 Aplikasi Absensi Sederhana berbasis android
 
-![Group 2350](https://github.com/KEVINGILBERTTODING/Absensi-App/assets/79959818/4c7f298e-6916-4e30-a126-b602916370ca)
+![Group 2347](https://github.com/KEVINGILBERTTODING/Absensi-App/assets/79959818/77d5d838-5073-417a-8350-08726098c636)
+
