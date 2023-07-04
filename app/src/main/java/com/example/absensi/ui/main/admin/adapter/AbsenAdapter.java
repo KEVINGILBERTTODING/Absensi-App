@@ -47,6 +47,12 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvNama.setText(absenModelList.get(holder.getAdapterPosition()).getNama());
         holder.tvTanggal.setText(absenModelList.get(holder.getAdapterPosition()).getWaktu());
+        holder.tvJenis.setText(absenModelList.get(holder.getAdapterPosition()).getJenis());
+
+        if (absenModelList.get(holder.getAdapterPosition()).getJenis().equals("Pulang")) {
+            holder.tvJenis.setTextColor(context.getColor(R.color.red));
+
+        }
 
     }
 
@@ -61,13 +67,14 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNama, tvTanggal;
+        TextView tvNama, tvTanggal, tvJenis;
         Button btnDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNama = itemView.findViewById(R.id.tvNama);
             tvTanggal = itemView.findViewById(R.id.tvDate);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvJenis = itemView.findViewById(R.id.tvJenis);
 
             adminServices = ApiConfig.getClient().create(AdminServices.class);
 

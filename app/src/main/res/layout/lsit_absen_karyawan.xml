@@ -31,6 +31,15 @@
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/green"
                 android:id="@+id/tvDate"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/blue"
+                android:id="@+id/tvJenis"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

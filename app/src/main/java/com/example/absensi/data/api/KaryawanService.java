@@ -33,7 +33,8 @@ public interface KaryawanService {
     Call<ResponseModel> insertAbsen(
             @Field("id_karyawan") String userId,
             @Field("nama") String nama,
-            @Field("waktu") String waktu
+            @Field("waktu") String waktu,
+            @Field("jenis") String jenis
 
     );
 
@@ -60,6 +61,11 @@ public interface KaryawanService {
 
     @GET("karyawan/getAllKeterangan")
     Call<List<KeteranganModel>> getAllKeterangan(
+            @Query("id") String id
+    );
+
+    @GET("karyawan/checkAbsen")
+    Call<AbsenModel> checkAbsen(
             @Query("id") String id
     );
  }

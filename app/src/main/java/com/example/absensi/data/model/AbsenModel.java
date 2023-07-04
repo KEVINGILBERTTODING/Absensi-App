@@ -13,12 +13,18 @@ public class AbsenModel implements Serializable {
     String nama;
     @SerializedName("waktu")
     String waktu;
+    @SerializedName("created_at")
+    String createdAt;
+    @SerializedName("jenis")
+    String jenis;
 
-    public AbsenModel(String id, String idKaryawan, String nama, String waktu) {
+    public AbsenModel(String id, String createdAt, String jenis, String idKaryawan, String nama, String waktu) {
         this.id = id;
         this.idKaryawan = idKaryawan;
         this.nama = nama;
         this.waktu = waktu;
+        this.jenis = jenis;
+        this.createdAt = createdAt;
     }
 
     public String getId() {
@@ -51,5 +57,21 @@ public class AbsenModel implements Serializable {
 
     public void setWaktu(String waktu) {
         this.waktu = waktu;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getJenis() {
+        return jenis;
+    }
+
+    public void setJenis(String jenis) {
+        this.jenis = jenis;
     }
 }

@@ -65,7 +65,7 @@ public class KaryawanHomeFragment extends Fragment {
 
     private FragmentKaryawanHomeBinding binding;
     SharedPreferences sharedPreferences;
-    String userId;
+    private String userId, jenisAbsen;
     List<AbsenModel> absenModelList;
     private IzinAdapter izinAdapter;
     List<KeteranganModel> keteranganModelList;
@@ -107,10 +107,9 @@ public class KaryawanHomeFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd-MM-yyyy hh:mm:ss a", Locale.ENGLISH);
         formattedTime  = dateFormat.format(currentTime);
         getAbsenHistory();
-
+        checkAbsen();
         binding.tvWaktu.setText(formattedTime);
         getProfile();
-
         listener();
 
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -145,14 +144,22 @@ public class KaryawanHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showProgressBar("Loading", "Validasi absen...", true);
-                karyawanService.insertAbsen(userId, binding.tvNama.getText().toString(), formattedTime)
+                karyawanService.insertAbsen(userId, binding.tvNama.getText().toString(), formattedTime, jenisAbsen)
                         .enqueue(new Callback<ResponseModel>() {
                             @Override
                             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                                 if (response.isSuccessful() && response.body().getStatus() == 200) {
                                     showProgressBar("sdsd", "sdsds", false);
-                                    showToast("success", "Berhasil absen hari ini");
+                                    if (jenisAbsen.equals("Datang")) {
+                                        checkAbsen();
+                                        showToast("success", "Berhasil absen hari ini");
+                                    }else {
+                                        checkAbsen();
+                                        showToast("success", "Berhasil absen pulang hari ini");
+
+                                    }
                                     binding.rvAbsen.setAdapter(null);
+
                                     getAbsenHistory();
                                 }else {
                                     showProgressBar("sdsd", "sdsds", false);
@@ -249,6 +256,43 @@ public class KaryawanHomeFragment extends Fragment {
         });
 
 
+    }
+
+    private void checkAbsen() {
+        showProgressBar("Loading", "Check absensi hari ini...", true);
+        karyawanService.checkAbsen(userId).enqueue(new Callback<AbsenModel>() {
+            @Override
+            public void onResponse(Call<AbsenModel> call, Response<AbsenModel> response) {
+                showProgressBar("s", "s", false);
+                if (response.isSuccessful() && response.body() != null) {
+
+                    if (response.body().getJenis().equals("Datang")) {
+                        binding.btnAbsentNow.setText("Absen Pulang");
+                        binding.btnAbsentNow.setBackgroundColor(getContext().getColor(R.color.red));
+                        jenisAbsen = "Pulang";
+
+                    }else {
+                        binding.btnAbsentNow.setText("Absen Sekarang");
+                        jenisAbsen = "Datang";
+
+
+                    }
+
+                }else {
+                    jenisAbsen = "Datang";
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AbsenModel> call, Throwable t) {
+                showProgressBar("", "", false);
+                binding.btnAbsentNow.setEnabled(false);
+                showToast("err", "Tidak ada koneksi internet");
+
+            }
+        });
     }
 
 
