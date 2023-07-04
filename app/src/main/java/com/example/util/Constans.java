@@ -13,4 +13,5 @@ public class Constans {
     public static final String SHARED_PREF_ROLE = "role";
     public static final String SHARED_PREF_JABATAN = "jabatan";
     public static final String SHARED_PREF_USER_ID = "user_id";
+    public static final String URL_REKAP_ABSENSI  = END_POINT + "admin/rekap_absen/";
 }

@@ -69,6 +69,19 @@
             android:layout_centerInParent="true"
             android:layout_height="wrap_content"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/green"
+            app:tint="@color/white"
+            android:id="@+id/btnFilter"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/baseline_filter_alt_24"/>
+
+
 
 
 
